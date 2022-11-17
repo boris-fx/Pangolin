@@ -21,13 +21,19 @@ function(embed_shader_files_now output escaped_shader_files project_prefix)
         # Get short filename
         STRING(REGEX REPLACE "^${project_prefix}" "" filename ${shader})
 
-        # Read data from file
-        file(READ ${shader} filedata)
+		if(EXISTS "${shader}")
+   
+			# Read data from file
+			file(READ ${shader} filedata)
 
-        # Append data to output file
-        file(APPEND ${output} "{ \"${filename}\",\n R\"SHADER_SOURCE(\n")
-        file(APPEND ${output} "${filedata}")
-        file(APPEND ${output} ")SHADER_SOURCE\" },\n")
+			# Append data to output file
+			file(APPEND ${output} "{ \"${filename}\",\n R\"SHADER_SOURCE(\n")
+			file(APPEND ${output} "${filedata}")
+			file(APPEND ${output} ")SHADER_SOURCE\" },\n")
+
+		else()
+		endif()
+
     endforeach()
 
     # Add footer

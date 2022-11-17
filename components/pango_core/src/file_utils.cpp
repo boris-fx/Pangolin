@@ -569,7 +569,7 @@ std::string GetExecutableDir() {
     std::string executablePath = GetExecutablePath();
     char* exePath = new char[executablePath.length()];
     strcpy(exePath, executablePath.c_str());
-    PathRemoveFileSpecA(exePath);
+    //PathRemoveFileSpecA(exePath);
     std::string directory = std::string(exePath);
     delete[] exePath;
     return directory;
